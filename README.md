@@ -2,8 +2,7 @@
 ## What are "Media Programs"?
 Media programs are programs related to media in any way, such as a metadata adding program (coming soon!).
 
-## Files
-None at the moment.
+## [Files](https://github.com/hkamran80/media_programs/wiki/Files)
 
 ## Dependencies
 A list of dependencies will be given for each file.

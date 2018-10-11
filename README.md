@@ -1,6 +1,6 @@
 # Media Programs
 ## What are "Media Programs"?
-Media Programs are programs related to media in any way. For example, a metadata-adding program.
+Media programs are programs related to media in any way, such as a metadata adding program (coming soon!).
 
 ## Files
 None at the moment.

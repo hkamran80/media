@@ -8,7 +8,7 @@ import os
 cmd = """ AtomicParsley "{}/{}.mp4" --title "{}" --TVShowName "{}" --TVSeason {} --TVEpisodeNum {} --description "{}" --stik "TV Show" --artwork "{}" -o "{}/{}.mp4" """
 
 directory_split = "|"
-base_directory = "/Users/hkamran/Desktop/Desktop/Media/YouTube/video/"
+base_directory = ""
 
 def prep_file(ep_file):
 	if ".mp4" in ep_file:

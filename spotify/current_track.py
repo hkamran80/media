@@ -7,38 +7,45 @@ Contributors:
 Last Updated: 2018-11-08, @hkamran80
 """
 
-try:
-	from Foundation import *
-except ImportError:
-	from CoreFoundation import *
+import platform
 
-getCurrentTrack = """
-set currentlyPlayingTrack to getCurrentlyPlayingTrack()
-displayTrackData(currentlyPlayingTrack)
+def macOS():
+	try:
+		from Foundation import *
+	except ImportError:
+		from CoreFoundation import *
 
-on getCurrentlyPlayingTrack()
-	tell application "Spotify"
-		set currentTrack to name of current track as string
-		set currentAlbum to album of current track as string
-		set currentArtist to artist of current track as string
+	getCurrentTrack = """
+	set currentlyPlayingTrack to getCurrentlyPlayingTrack()
+	displayTrackData(currentlyPlayingTrack)
 
-		return currentArtist & " - " & currentTrack & " -- " & currentAlbum
-	end tell
-end getCurrentlyPlayingTrack
+	on getCurrentlyPlayingTrack()
+		tell application "Spotify"
+			set currentTrack to name of current track as string
+			set currentAlbum to album of current track as string
+			set currentArtist to artist of current track as string
 
-on displayTrackData(trackData)
-	copy trackData to stdout
-end displayTrackData
-"""
+			return currentArtist & " - " & currentTrack & " -- " & currentAlbum
+		end tell
+	end getCurrentlyPlayingTrack
 
-applescript = str(NSAppleScript.alloc().initWithSource_(getCurrentTrack).executeAndReturnError_(None))
+	on displayTrackData(trackData)
+		copy trackData to stdout
+	end displayTrackData
+	"""
 
-as_utxt = applescript[applescript.find("(\"")+2:applescript.find("\")")]
+	applescript = str(NSAppleScript.alloc().initWithSource_(getCurrentTrack).executeAndReturnError_(None))
 
-track = {}
+	as_utxt = applescript[applescript.find("(\"")+2:applescript.find("\")")]
 
-track["track"] =  as_utxt.split(" - ")[1].split(" -- ")[0]
-track["artist"] = as_utxt.split(" - ")[0]
-track["album"] =  as_utxt.split(" -- ")[1]
+	track = {}
 
-print(track)
+	track["track"] =  as_utxt.split(" - ")[1].split(" -- ")[0]
+	track["artist"] = as_utxt.split(" - ")[0]
+	track["album"] =  as_utxt.split(" -- ")[1]
+
+	return track
+
+if __name__ == "__main__":
+	if platform.system == "Darwin":
+		macOS()
